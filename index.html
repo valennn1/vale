@@ -8,17 +8,9 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
     <style>
-        /* Basic styling */
         body {
             margin: 0;
             overflow: hidden;
-        }
-        .camera-feed {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
         }
     </style>
 </head>
@@ -26,37 +18,29 @@
     <!-- AR.js Scene -->
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
         
-        <!-- Define each marker for the images and overlay videos -->
         <!-- Marker 1 -->
         <a-marker preset="custom" type="pattern" url="pattern1.patt">
-            <a-video src="video1.mp4" width="1" height="0.5" position="0 0 0"></a-video>
+            <a-video src="video1.mp4" width="1" height="0.5" position="0 0 0" autoplay loop></a-video>
         </a-marker>
         
         <!-- Marker 2 -->
         <a-marker preset="custom" type="pattern" url="pattern2.patt">
-            <a-video src="video2.mp4" width="1" height="0.5" position="0 0 0"></a-video>
+            <a-video src="video2.mp4" width="1" height="0.5" position="0 0 0" autoplay loop></a-video>
         </a-marker>
 
-        <!-- Repeat for each of the 7 images you want to scan -->
+        <!-- Repeat this structure for each of your 7 images -->
         <a-marker preset="custom" type="pattern" url="pattern3.patt">
-            <a-video src="video3.mp4" width="1" height="0.5" position="0 0 0"></a-video>
+            <a-video src="video3.mp4" width="1" height="0.5" position="0 0 0" autoplay loop></a-video>
         </a-marker>
         <a-marker preset="custom" type="pattern" url="pattern4.patt">
-            <a-video src="video4.mp4" width="1" height="0.5" position="0 0 0"></a-video>
+            <a-video src="video4.mp4" width="1" height="0.5" position="0 0 0" autoplay loop></a-video>
         </a-marker>
         <a-marker preset="custom" type="pattern" url="pattern5.patt">
-            <a-video src="video5.mp4" width="1" height="0.5" position="0 0 0"></a-video>
-        </a-marker>
-        <a-marker preset="custom" type="pattern" url="pattern6.patt">
-            <a-video src="video6.mp4" width="1" height="0.5" position="0 0 0"></a-video>
-        </a-marker>
-        <a-marker preset="custom" type="pattern" url="pattern7.patt">
-            <a-video src="video7.mp4" width="1" height="0.5" position="0 0 0"></a-video>
+            <a-video src="video5.mp4" width="1" height="0.5" position="0 0 0" autoplay loop></a-video>
         </a-marker>
 
         <!-- Camera -->
         <a-entity camera></a-entity>
     </a-scene>
-
 </body>
 </html>
