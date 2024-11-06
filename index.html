@@ -12,20 +12,35 @@
             margin: 0;
             overflow: hidden;
         }
-        /* Optional: Hides any UI elements in the background */
         .a-scene {
             position: absolute;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: transparent; /* Makes the background clear */
+            background-color: transparent;
+        }
+        /* Flashlight button styling */
+        #flashlight-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
+    <!-- Flashlight Button -->
+    <button id="flashlight-btn">💡 Flashlight</button>
+
     <!-- AR.js Scene -->
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; vrModeUI: false;">
         
         <!-- Marker 1 with Adjusted Width, Height, and Position -->
         <a-marker preset="custom" type="pattern" url="pattern1.patt">
@@ -55,5 +70,29 @@
         <!-- Camera -->
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        // Toggle Flashlight
+        let flashlightOn = false;
+        const flashlightBtn = document.getElementById('flashlight-btn');
+        
+        flashlightBtn.addEventListener('click', () => {
+            flashlightOn = !flashlightOn;
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } } })
+                    .then(stream => {
+                        const track = stream.getVideoTracks()[0];
+                        const imageCapture = new ImageCapture(track);
+                        imageCapture.getPhotoCapabilities().then(() => {
+                            track.applyConstraints({
+                                advanced: [{ torch: flashlightOn }]
+                            }).catch(e => console.error(e));
+                        });
+                    }).catch(e => console.error("Flashlight not supported", e));
+            } else {
+                alert("Flashlight not supported on this device.");
+            }
+        });
+    </script>
 </body>
 </html>
