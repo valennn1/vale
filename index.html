@@ -42,29 +42,29 @@
     <!-- AR.js Scene -->
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; vrModeUI: false;">
         
-        <!-- Marker 1 with Adjusted Width, Height, Position, and Muted Video -->
+        <!-- Marker 1 with Muted, Playsinline Video -->
         <a-marker preset="custom" type="pattern" url="pattern1.patt">
-            <a-video src="video1.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted></a-video>
+            <a-video src="video1.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted playsinline></a-video>
         </a-marker>
         
         <!-- Marker 2 -->
         <a-marker preset="custom" type="pattern" url="pattern2.patt">
-            <a-video src="video2.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted></a-video>
+            <a-video src="video2.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted playsinline></a-video>
         </a-marker>
 
         <!-- Marker 3 -->
         <a-marker preset="custom" type="pattern" url="pattern3.patt">
-            <a-video src="video3.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted></a-video>
+            <a-video src="video3.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted playsinline></a-video>
         </a-marker>
 
         <!-- Marker 4 -->
         <a-marker preset="custom" type="pattern" url="pattern4.patt">
-            <a-video src="video4.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted></a-video>
+            <a-video src="video4.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted playsinline></a-video>
         </a-marker>
 
         <!-- Marker 5 -->
         <a-marker preset="custom" type="pattern" url="pattern5.patt">
-            <a-video src="video5.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted></a-video>
+            <a-video src="video5.mp4" width="0.8" height="1.0" position="0 0.1 0" autoplay loop muted playsinline></a-video>
         </a-marker>
 
         <!-- Camera -->
@@ -93,6 +93,13 @@
                 alert("Flashlight not supported on this device.");
             }
         });
+
+        // Mute all videos on load
+        window.onload = function() {
+            document.querySelectorAll('a-video').forEach(video => {
+                video.muted = true;
+            });
+        };
     </script>
 </body>
 </html>
